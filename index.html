@@ -3,390 +3,188 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#07111f" />
-  <meta name="description" content="Portal Kelly Menezes JB: aplicativos, resultados, palpites, ferramentas e área VIP." />
+  <meta name="theme-color" content="#06101d" />
   <title>Kelly Menezes JB | Portal Oficial</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
-
   <header class="topbar">
-    <a href="#inicio" class="brand">
-      <span class="brand-symbol">K</span>
-      <span class="brand-copy">
-        <strong>Kelly Menezes</strong>
-        <small>Portal JB</small>
-      </span>
-    </a>
-
-    <nav class="desktop-nav">
-      <a href="#apps">Aplicativos</a>
+    <a class="brand" href="#inicio"><span>K</span><div><strong>Kelly Menezes</strong><small>Portal JB</small></div></a>
+    <nav>
+      <a href="#apps">Apps</a>
       <a href="#resultados">Resultados</a>
       <a href="#palpites">Palpites</a>
-      <a href="#ferramentas">Ferramentas</a>
+      <a href="#vip">VIP</a>
     </nav>
-
-    <a href="#vip" class="header-vip">Área VIP</a>
+    <a class="admin-link" href="admin.html">Painel</a>
   </header>
 
   <main>
     <section class="hero shell" id="inicio">
-      <div class="hero-copy reveal">
-        <span class="pill">PORTAL OFICIAL • ACESSO RÁPIDO</span>
-        <h1>Encontre tudo em poucos toques.</h1>
-        <p>Aplicativos, resultados, horários, palpites e ferramentas organizados para facilitar o seu atendimento e a experiência dos seus clientes.</p>
-
+      <div>
+        <span class="eyebrow">PORTAL OFICIAL</span>
+        <h1>Informação atualizada, ferramentas úteis e conteúdo VIP de verdade.</h1>
+        <p>Esta versão foi preparada para atualizar automaticamente pelo Firestore e também funciona em modo demonstração quando ainda não estiver conectada.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#apps">Escolher aplicativo</a>
-          <a class="button secondary" href="#resultados">Ver resultados</a>
-        </div>
-
-        <div class="hero-trust">
-          <span>✓ Feito para celular</span>
-          <span>✓ Navegação simples</span>
-          <span>✓ Atualização diária</span>
+          <a class="btn primary" href="#resultados">Ver resultados</a>
+          <a class="btn secondary" href="#vip">Entrar no VIP</a>
         </div>
       </div>
-
-      <div class="hero-dashboard reveal">
-        <div class="glass-card next-card">
-          <div class="card-topline">
-            <div>
-              <span class="status-dot"></span>
-              <small>PRÓXIMO HORÁRIO</small>
-            </div>
-            <span class="mini-badge">AO VIVO</span>
-          </div>
-          <strong id="nextDrawName">Carregando...</strong>
-          <div class="countdown" id="countdown">00:00:00</div>
+      <aside class="status-card">
+        <div class="status-line"><span class="dot"></span><small id="connectionStatus">Modo demonstração</small></div>
+        <strong id="nextDrawName">Próximo horário</strong>
+        <div id="countdown" class="countdown">00:00:00</div>
+        <div class="mini-status">
+          <span>Atualização automática</span>
+          <b id="lastUpdate">Aguardando</b>
         </div>
-
-        <div class="shortcut-board">
-          <a href="#apps" class="shortcut-card">
-            <span class="shortcut-icon">📱</span>
-            <span><strong>Aplicativos</strong><small>Links e bônus</small></span>
-            <b>›</b>
-          </a>
-          <a href="#resultados" class="shortcut-card">
-            <span class="shortcut-icon">📊</span>
-            <span><strong>Resultados</strong><small>Consulta por horário</small></span>
-            <b>›</b>
-          </a>
-          <a href="#palpites" class="shortcut-card">
-            <span class="shortcut-icon">🎯</span>
-            <span><strong>Palpites</strong><small>Destaques do dia</small></span>
-            <b>›</b>
-          </a>
-        </div>
-      </div>
+      </aside>
     </section>
 
-    <section class="shell section compact-section">
-      <div class="welcome-strip reveal">
-        <div>
-          <span class="section-kicker">COMECE POR AQUI</span>
-          <h2>O que você precisa agora?</h2>
-        </div>
-        <div class="task-grid">
-          <a href="#apps" class="task-card">
-            <div class="task-icon blue">📱</div>
-            <div><strong>Acessar um app</strong><small>Veja as plataformas disponíveis</small></div>
-          </a>
-          <a href="#resultados" class="task-card">
-            <div class="task-icon green">📊</div>
-            <div><strong>Consultar resultado</strong><small>Escolha a praça e o horário</small></div>
-          </a>
-          <a href="#ferramentas" class="task-card">
-            <div class="task-icon purple">🧮</div>
-            <div><strong>Usar uma ferramenta</strong><small>Calcule, gere e copie</small></div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-soft" id="apps">
+    <section class="section soft" id="apps">
       <div class="shell">
-        <div class="section-head reveal">
-          <div>
-            <span class="section-kicker">CENTRAL DE APLICATIVOS</span>
-            <h2>Escolha onde deseja acessar</h2>
-            <p>As informações mais importantes ficam visíveis logo no primeiro olhar.</p>
-          </div>
-          <div class="search-box">
-            <span>⌕</span>
-            <input id="appSearch" type="search" placeholder="Buscar aplicativo">
-          </div>
+        <div class="section-head">
+          <div><span class="eyebrow">APLICATIVOS</span><h2>Acesso rápido</h2></div>
+          <input id="appSearch" class="search" placeholder="Buscar aplicativo">
         </div>
-        <div class="app-grid" id="appGrid"></div>
+        <div class="grid apps" id="appGrid"></div>
       </div>
     </section>
 
     <section class="section" id="resultados">
       <div class="shell">
-        <div class="section-head reveal">
-          <div>
-            <span class="section-kicker">RESULTADOS</span>
-            <h2>Consulta rápida e organizada</h2>
-            <p>Troque de praça com um toque e veja os cinco resultados principais.</p>
-          </div>
-          <button class="refresh-button" id="refreshResults">↻ Atualizar</button>
+        <div class="section-head">
+          <div><span class="eyebrow">RESULTADOS</span><h2>Atualização automática</h2><p>Quando conectado ao Firestore, os dados chegam em tempo real. Sem conexão, o portal usa dados demonstrativos.</p></div>
+          <button id="manualRefresh" class="btn secondary">Atualizar agora</button>
         </div>
-
-        <div class="results-layout">
-          <div class="result-selector reveal" id="resultTabs">
-            <button class="result-option active" data-result="rio">
-              <span class="result-option-icon">RJ</span>
-              <span><strong>Rio / PT-Rio</strong><small>Último horário</small></span>
-            </button>
-            <button class="result-option" data-result="look">
-              <span class="result-option-icon">GO</span>
-              <span><strong>Look Goiás</strong><small>Último horário</small></span>
-            </button>
-            <button class="result-option" data-result="nacional">
-              <span class="result-option-icon">BR</span>
-              <span><strong>Nacional</strong><small>Último horário</small></span>
-            </button>
-          </div>
-
-          <article class="results-card reveal">
-            <div class="results-card-head">
-              <div>
-                <small>RESULTADO SELECIONADO</small>
-                <h3 id="resultTitle">Rio / PT-Rio • 11:20</h3>
-              </div>
-              <span class="updated-chip">Atualizado agora</span>
-            </div>
-            <div class="result-table" id="resultTable"></div>
-            <div class="notice-box">
-              <span>ℹ</span>
-              <p>Os dados exibidos são demonstrativos. Conecte este espaço ao seu Firestore para resultados reais.</p>
-            </div>
-          </article>
+        <div class="result-tabs" id="resultTabs">
+          <button class="active" data-result="rio">Rio / PT-Rio</button>
+          <button data-result="look">Look Goiás</button>
+          <button data-result="nacional">Nacional</button>
         </div>
+        <article class="result-card">
+          <div class="result-card-head">
+            <div><small>RESULTADO ATUAL</small><h3 id="resultTitle">Carregando...</h3></div>
+            <span class="live-badge">AUTO</span>
+          </div>
+          <div id="resultTable"></div>
+        </article>
       </div>
     </section>
 
-    <section class="section section-soft" id="palpites">
+    <section class="section soft" id="palpites">
       <div class="shell">
-        <div class="section-head reveal">
-          <div>
-            <span class="section-kicker">CONTEÚDO DO DIA</span>
-            <h2>Palpites em destaque</h2>
-            <p>Visual mais limpo para os números chamarem atenção.</p>
-          </div>
-        </div>
-
-        <div class="highlight-grid">
-          <article class="daily-card featured reveal">
-            <div class="daily-card-top">
-              <span class="daily-label">BICHO DO DIA</span>
-              <span class="daily-date" id="todayDate">Hoje</span>
-            </div>
-            <div class="animal-focus">
-              <span class="animal-emoji">🦚</span>
-              <div><small>DESTAQUE</small><h3>Pavão</h3></div>
-            </div>
-            <div class="numbers-large">
-              <span>1973</span><span>1974</span><span>1975</span><span>1976</span>
-            </div>
-            <button class="copy-row" data-copy="🦚 Pavão: 1973 1974 1975 1976">Copiar números</button>
-          </article>
-
-          <article class="daily-card reveal">
-            <div class="daily-card-top">
-              <span class="daily-label">CRUZ DO DIA</span>
-              <span class="daily-icon">✦</span>
-            </div>
-            <div class="cross-modern">
-              <span></span><b>8</b><span></span>
-              <b>4</b><i>✦</i><b>7</b>
-              <span></span><b>1</b><span></span>
-            </div>
-            <p>Combinações centrais organizadas para facilitar a leitura.</p>
-          </article>
-
-          <article class="daily-card message-card reveal">
-            <div class="daily-card-top">
-              <span class="daily-label">MENSAGEM DO DIA</span>
-              <span class="daily-icon">☀</span>
-            </div>
-            <blockquote>Organize suas escolhas, mantenha o foco e use apenas valores que não comprometam o seu orçamento.</blockquote>
-            <small>Conteúdo para maiores de 18 anos.</small>
-          </article>
-        </div>
+        <div class="section-head"><div><span class="eyebrow">PALPITES</span><h2>Conteúdo administrável</h2></div></div>
+        <div class="grid highlights" id="publicPosts"></div>
       </div>
     </section>
 
     <section class="section" id="ferramentas">
       <div class="shell">
-        <div class="section-head reveal">
-          <div>
-            <span class="section-kicker">FERRAMENTAS</span>
-            <h2>Resolva tudo sem sair do portal</h2>
-            <p>Ferramentas simples, diretas e fáceis de usar no celular.</p>
+        <div class="section-head"><div><span class="eyebrow">FERRAMENTAS</span><h2>Recursos rápidos</h2></div></div>
+        <div class="tool-tabs">
+          <button class="active" data-panel="calcPanel">Calculadora</button>
+          <button data-panel="genPanel">Gerador</button>
+          <button data-panel="msgPanel">Mensagens</button>
+        </div>
+
+        <div class="tool-panel active" id="calcPanel">
+          <div><h3>Calculadora de retorno</h3><p>Informe o valor e selecione o multiplicador.</p></div>
+          <div class="form-stack">
+            <label>Valor<input type="number" id="betValue" min="0" step="0.01" placeholder="0,00"></label>
+            <label>Multiplicador<select id="multiplier"><option value="18">18x</option><option value="60">60x</option><option value="600">600x</option><option value="9000">9.000x</option></select></label>
+            <button id="calculateButton" class="btn primary full">Calcular</button>
+            <div class="output"><small>ESTIMATIVA</small><strong id="calculationResult">R$ 0,00</strong></div>
           </div>
         </div>
 
-        <div class="tools-tabs reveal">
-          <button class="tool-tab active" data-tool="calculatorPanel">Calculadora</button>
-          <button class="tool-tab" data-tool="generatorPanel">Gerador</button>
-          <button class="tool-tab" data-tool="messagePanel">Mensagens</button>
+        <div class="tool-panel" id="genPanel">
+          <div><h3>Gerador de combinações</h3><p>Gere dezenas, centenas ou milhares.</p></div>
+          <div class="form-stack">
+            <label>Quantidade<select id="guessQuantity"><option>4</option><option>6</option><option>8</option><option>10</option></select></label>
+            <label>Formato<select id="guessDigits"><option value="4">Milhar</option><option value="3">Centena</option><option value="2">Dezena</option></select></label>
+            <button id="generateGuesses" class="btn primary full">Gerar</button>
+            <div id="generatedNumbers" class="number-box">—</div>
+          </div>
         </div>
 
-        <div class="tool-panels">
-          <article class="tool-panel active reveal" id="calculatorPanel">
-            <div class="tool-panel-copy">
-              <span class="tool-emoji">🧮</span>
-              <h3>Calculadora de retorno</h3>
-              <p>Informe um valor e escolha o multiplicador para visualizar uma estimativa.</p>
-            </div>
-            <div class="tool-form">
-              <label>Valor informado
-                <div class="input-prefix"><span>R$</span><input type="number" id="betValue" min="0" step="0.01" placeholder="0,00"></div>
-              </label>
-              <label>Tipo de cálculo
-                <select id="multiplier">
-                  <option value="18">Grupo • 18x</option>
-                  <option value="60">Duque • 60x</option>
-                  <option value="600">Centena • 600x</option>
-                  <option value="9000">Milhar • 9.000x</option>
-                </select>
-              </label>
-              <button class="button primary full" id="calculateButton">Calcular estimativa</button>
-              <div class="result-output">
-                <small>RETORNO ESTIMADO</small>
-                <strong id="calculationResult">R$ 0,00</strong>
-              </div>
-            </div>
-          </article>
-
-          <article class="tool-panel reveal" id="generatorPanel">
-            <div class="tool-panel-copy">
-              <span class="tool-emoji">🎲</span>
-              <h3>Gerador de combinações</h3>
-              <p>Escolha a quantidade e o formato para criar combinações aleatórias.</p>
-            </div>
-            <div class="tool-form">
-              <label>Quantidade
-                <select id="guessQuantity">
-                  <option>4</option><option>6</option><option>8</option><option>10</option>
-                </select>
-              </label>
-              <label>Formato
-                <select id="guessDigits">
-                  <option value="4">Milhar</option>
-                  <option value="3">Centena</option>
-                  <option value="2">Dezena</option>
-                </select>
-              </label>
-              <button class="button primary full" id="generateGuesses">Gerar combinações</button>
-              <div class="generated-numbers" id="generatedNumbers">Seus números aparecerão aqui.</div>
-            </div>
-          </article>
-
-          <article class="tool-panel reveal" id="messagePanel">
-            <div class="tool-panel-copy">
-              <span class="tool-emoji">✍️</span>
-              <h3>Gerador de mensagens</h3>
-              <p>Crie textos rápidos para enviar aos seus clientes.</p>
-            </div>
-            <div class="tool-form">
-              <label>Tipo de mensagem
-                <select id="messageType">
-                  <option value="convite">Convite</option>
-                  <option value="bonus">Bônus</option>
-                  <option value="resultado">Resultado</option>
-                  <option value="bomdia">Bom dia</option>
-                </select>
-              </label>
-              <label>Nome do aplicativo
-                <input type="text" id="messageApp" placeholder="Ex.: JBPIX">
-              </label>
-              <button class="button primary full" id="generateMessage">Criar mensagem</button>
-              <textarea id="generatedMessage" rows="5" readonly placeholder="Sua mensagem aparecerá aqui."></textarea>
-              <button class="button secondary full" id="copyMessage">Copiar mensagem</button>
-            </div>
-          </article>
+        <div class="tool-panel" id="msgPanel">
+          <div><h3>Gerador de mensagens</h3><p>Crie textos rápidos para seus clientes.</p></div>
+          <div class="form-stack">
+            <label>Tipo<select id="messageType"><option value="convite">Convite</option><option value="bonus">Bônus</option><option value="resultado">Resultado</option><option value="bomdia">Bom dia</option></select></label>
+            <label>Aplicativo<input id="messageApp" placeholder="Ex.: JBPIX"></label>
+            <button id="generateMessage" class="btn primary full">Criar</button>
+            <textarea id="generatedMessage" rows="5" readonly></textarea>
+            <button id="copyMessage" class="btn secondary full">Copiar</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section section-soft" id="agenda">
+    <section class="section vip-section" id="vip">
       <div class="shell">
-        <div class="section-head reveal">
-          <div>
-            <span class="section-kicker">AGENDA</span>
-            <h2>Horários do dia</h2>
-            <p>Uma linha do tempo simples para o cliente localizar o próximo horário.</p>
-          </div>
-        </div>
-        <div class="schedule-list reveal" id="scheduleTimeline"></div>
-      </div>
-    </section>
-
-    <section class="section" id="vip">
-      <div class="shell">
-        <div class="vip-container reveal">
-          <div class="vip-copy">
-            <span class="pill light">ÁREA EXCLUSIVA</span>
-            <h2>Clube VIP Kelly Menezes JB</h2>
-            <p>Espaço para conteúdos exclusivos, avisos, artes, vídeos e materiais especiais.</p>
+        <div class="vip-shell">
+          <div class="vip-intro">
+            <span class="eyebrow">CLUBE VIP</span>
+            <h2>Conteúdo exclusivo, avisos, materiais e downloads.</h2>
+            <p>Agora a área VIP possui conteúdo real: posts exclusivos, avisos importantes, arquivos e histórico.</p>
             <div class="vip-benefits">
-              <span>✓ Conteúdo por data</span>
-              <span>✓ Avisos importantes</span>
-              <span>✓ Materiais exclusivos</span>
+              <span>✓ Palpites exclusivos</span>
+              <span>✓ Avisos rápidos</span>
+              <span>✓ Materiais para baixar</span>
             </div>
           </div>
-          <form class="vip-form" id="vipForm">
-            <h3>Entrar na área VIP</h3>
-            <label>Usuário<input type="text" id="vipUser" placeholder="Digite seu usuário" required></label>
-            <label>Senha<input type="password" id="vipPassword" placeholder="Digite sua senha" required></label>
-            <button class="button primary full" type="submit">Entrar</button>
-            <small>Teste: <b>vip</b> / <b>1234</b></small>
+
+          <div class="vip-login" id="vipLoginBox">
+            <h3>Entrar no VIP</h3>
+            <label>Usuário<input id="vipUser" placeholder="Usuário"></label>
+            <label>Senha<input id="vipPassword" type="password" placeholder="Senha"></label>
+            <button id="vipLoginButton" class="btn primary full">Entrar</button>
+            <small>Teste local: vip / 1234</small>
             <p id="vipMessage"></p>
-          </form>
+          </div>
+
+          <div class="vip-dashboard hidden" id="vipDashboard">
+            <div class="vip-dashboard-head">
+              <div><small>ÁREA EXCLUSIVA</small><h3>Bem-vinda ao Clube VIP</h3></div>
+              <button id="vipLogout" class="btn secondary">Sair</button>
+            </div>
+            <div class="vip-nav">
+              <button class="active" data-vip-panel="vipPostsPanel">Conteúdos</button>
+              <button data-vip-panel="vipNoticesPanel">Avisos</button>
+              <button data-vip-panel="vipFilesPanel">Downloads</button>
+            </div>
+            <div class="vip-panel active" id="vipPostsPanel"><div id="vipPosts" class="grid vip-grid"></div></div>
+            <div class="vip-panel" id="vipNoticesPanel"><div id="vipNotices" class="notice-list"></div></div>
+            <div class="vip-panel" id="vipFilesPanel"><div id="vipFiles" class="file-list"></div></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section compact-section">
-      <div class="shell">
-        <div class="support-card reveal">
-          <div class="support-icon">💬</div>
-          <div>
-            <span class="section-kicker">ATENDIMENTO DIRETO</span>
-            <h2>Precisa de ajuda?</h2>
-            <p>Fale diretamente com Kelly Menezes JB pelo WhatsApp.</p>
-          </div>
-          <a class="button primary" id="whatsappMain" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
-        </div>
+    <section class="section soft">
+      <div class="shell support">
+        <div><span class="eyebrow">ATENDIMENTO</span><h2>Fale comigo</h2><p>Use o botão abaixo para abrir o WhatsApp.</p></div>
+        <a id="whatsappMain" class="btn primary" target="_blank" rel="noopener">Chamar no WhatsApp</a>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="brand">
-      <span class="brand-symbol">K</span>
-      <span class="brand-copy"><strong>Kelly Menezes JB</strong><small>Portal oficial</small></span>
-    </div>
-    <p>Conteúdo informativo. Proibido para menores de 18 anos. Jogue com responsabilidade.</p>
-    <small>© <span id="currentYear"></span></small>
-  </footer>
+  <footer><strong>Kelly Menezes JB</strong><span>Conteúdo para maiores de 18 anos. Jogue com responsabilidade.</span></footer>
 
-  <nav class="mobile-bottom-nav">
-    <a href="#inicio"><span>⌂</span><small>Início</small></a>
-    <a href="#apps"><span>▣</span><small>Apps</small></a>
-    <a href="#resultados"><span>▤</span><small>Resultados</small></a>
-    <a href="#ferramentas"><span>✦</span><small>Ferramentas</small></a>
-    <a href="#vip"><span>★</span><small>VIP</small></a>
+  <nav class="mobile-nav">
+    <a href="#inicio">⌂<small>Início</small></a>
+    <a href="#apps">▣<small>Apps</small></a>
+    <a href="#resultados">▤<small>Resultados</small></a>
+    <a href="#vip">★<small>VIP</small></a>
   </nav>
 
-  <div class="toast" id="toast"></div>
-  <script src="app.js"></script>
+  <div id="toast" class="toast"></div>
+
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

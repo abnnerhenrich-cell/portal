@@ -1,40 +1,63 @@
-# Portal Kelly Menezes JB — Versão 2
+# Portal Kelly Menezes JB — Versão 3 funcional
 
-Esta versão foi refeita com foco em:
+## O que mudou
 
-- estética mais premium
-- navegação mais intuitiva
-- melhor experiência no celular
-- menos informação competindo na tela
-- ações principais mais fáceis de encontrar
-- barra fixa inferior no celular
-- busca de aplicativos
-- resultados com seletor visual
-- ferramentas organizadas em abas
+- atualização automática a cada 60 segundos
+- conexão pronta com Firebase/Firestore
+- listener em tempo real com `onSnapshot`
+- modo demonstração quando o Firebase ainda não está configurado
+- área VIP com conteúdos, avisos e downloads
+- painel administrativo local para cadastrar conteúdo
+- conteúdo salvo no navegador com localStorage
+- login VIP demonstrativo
+- login administrativo demonstrativo
 
-## Como abrir
+## Login VIP
 
-Abra o arquivo `index.html`.
+- usuário: `vip`
+- senha: `1234`
 
-## Como editar
+## Login do painel
 
-No arquivo `app.js` você pode trocar:
+- usuário: `admin`
+- senha: `admin123`
 
-- número do WhatsApp
-- nomes dos aplicativos
-- bônus
-- links
-- horários
-- resultados demonstrativos
+Abra `admin.html` para gerenciar:
+- palpites públicos
+- conteúdos VIP
+- avisos
+- downloads
 
-## Publicação
+## Para ativar resultados reais
 
-A pasta pode ser publicada no Vercel, Netlify ou GitHub Pages.
+Abra `config.js` e altere:
 
-## Área VIP
+```js
+firebase: {
+  enabled: true,
+  apiKey: "...",
+  authDomain: "...",
+  projectId: "...",
+  storageBucket: "...",
+  messagingSenderId: "...",
+  appId: "..."
+}
+```
 
-Login demonstrativo:
-- usuário: vip
-- senha: 1234
+A coleção padrão é `resultados`.
 
-Para uso real, conecte Firebase Authentication.
+O portal tenta interpretar documentos com campos como:
+- `loteria`
+- `horario`
+- `timestamp`
+- `premios` ou `resultados`
+
+Cada prêmio pode ter:
+- `milhar`
+- `numero`
+- `bicho`
+- `animal`
+
+## Observação importante
+
+O painel administrativo atual salva no navegador. Para vários dispositivos e segurança real, mova esses conteúdos para o Firestore e use Firebase Authentication.
