@@ -69,3 +69,13 @@ O painel administrativo atual salva no navegador. Para vários dispositivos e se
 - A lista de apps foi substituída por um botão para https://kellymenezes.app.
 - O gerador de mensagens foi removido.
 - Novo gerador avançado de milhar com quantidade, início, final, filtro de repetição e botão para copiar.
+
+
+## Versão 5 — navegação clean
+
+- Central de Aplicativos transformada em um card totalmente clicável.
+- Não existe mais um botão separado dentro do retângulo.
+- O card inteiro abre https://kellymenezes.app.
+- Nova área de acesso rápido com quatro opções principais.
+- Melhor resposta visual ao passar o mouse e ao tocar no celular.
+- Área VIP com visual de biblioteca de conteúdos.
