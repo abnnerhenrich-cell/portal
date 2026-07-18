@@ -21,6 +21,16 @@
     </nav>
     <a class="admin-link" href="admin.html">Painel</a>
   </header>
+  <section id="importantNoticeBar" class="important-notice hidden">
+    <div class="shell important-notice-inner">
+      <div class="important-notice-copy">
+        <span class="important-icon">⚠</span>
+        <div><small>AVISO IMPORTANTE</small><strong id="importantNoticeTitle">Aviso importante</strong><p id="importantNoticeText"></p></div>
+      </div>
+      <button id="closeImportantNotice" class="important-close" aria-label="Fechar aviso">×</button>
+    </div>
+  </section>
+
 
   <main>
     <section class="hero shell" id="inicio">
@@ -46,11 +56,12 @@
 
     <section class="section soft" id="apps">
       <div class="shell">
-        <div class="section-head">
-          <div><span class="eyebrow">APLICATIVOS</span><h2>Acesso rápido</h2></div>
-          <input id="appSearch" class="search" placeholder="Buscar aplicativo">
-        </div>
-        <div class="grid apps" id="appGrid"></div>
+        <div class="section-head"><div><span class="eyebrow">CENTRAL DE APLICATIVOS</span><h2>Todos os aplicativos em um só lugar</h2><p>Acesse a central oficial para visualizar as plataformas disponíveis.</p></div></div>
+        <article class="apps-central-card">
+          <div class="apps-central-icon">📱</div>
+          <div class="apps-central-copy"><small>ACESSO RÁPIDO</small><h3>Central de Aplicativos</h3><p>Abra a central Kelly Menezes para consultar todos os aplicativos.</p></div>
+          <a class="btn primary apps-central-button" href="https://kellymenezes.app" target="_blank" rel="noopener">Abrir Central de Aplicativos</a>
+        </article>
       </div>
     </section>
 
@@ -84,41 +95,21 @@
 
     <section class="section" id="ferramentas">
       <div class="shell">
-        <div class="section-head"><div><span class="eyebrow">FERRAMENTAS</span><h2>Recursos rápidos</h2></div></div>
-        <div class="tool-tabs">
-          <button class="active" data-panel="calcPanel">Calculadora</button>
-          <button data-panel="genPanel">Gerador</button>
-          <button data-panel="msgPanel">Mensagens</button>
-        </div>
-
+        <div class="section-head"><div><span class="eyebrow">RECURSOS RÁPIDOS</span><h2>Ferramentas mais úteis</h2><p>Uma calculadora direta e um gerador de milhar mais completo.</p></div></div>
+        <div class="tool-tabs"><button class="active" data-panel="calcPanel">Calculadora</button><button data-panel="milharPanel">Gerador de milhar</button></div>
         <div class="tool-panel active" id="calcPanel">
           <div><h3>Calculadora de retorno</h3><p>Informe o valor e selecione o multiplicador.</p></div>
-          <div class="form-stack">
-            <label>Valor<input type="number" id="betValue" min="0" step="0.01" placeholder="0,00"></label>
-            <label>Multiplicador<select id="multiplier"><option value="18">18x</option><option value="60">60x</option><option value="600">600x</option><option value="9000">9.000x</option></select></label>
-            <button id="calculateButton" class="btn primary full">Calcular</button>
-            <div class="output"><small>ESTIMATIVA</small><strong id="calculationResult">R$ 0,00</strong></div>
-          </div>
+          <div class="form-stack"><label>Valor<input type="number" id="betValue" min="0" step="0.01" placeholder="0,00"></label><label>Multiplicador<select id="multiplier"><option value="18">18x</option><option value="60">60x</option><option value="600">600x</option><option value="9000">9.000x</option></select></label><button id="calculateButton" class="btn primary full">Calcular</button><div class="output"><small>ESTIMATIVA</small><strong id="calculationResult">R$ 0,00</strong></div></div>
         </div>
-
-        <div class="tool-panel" id="genPanel">
-          <div><h3>Gerador de combinações</h3><p>Gere dezenas, centenas ou milhares.</p></div>
+        <div class="tool-panel" id="milharPanel">
+          <div><h3>Gerador avançado de milhar</h3><p>Gere milhares sem repetição e personalize os filtros.</p></div>
           <div class="form-stack">
-            <label>Quantidade<select id="guessQuantity"><option>4</option><option>6</option><option>8</option><option>10</option></select></label>
-            <label>Formato<select id="guessDigits"><option value="4">Milhar</option><option value="3">Centena</option><option value="2">Dezena</option></select></label>
-            <button id="generateGuesses" class="btn primary full">Gerar</button>
-            <div id="generatedNumbers" class="number-box">—</div>
-          </div>
-        </div>
-
-        <div class="tool-panel" id="msgPanel">
-          <div><h3>Gerador de mensagens</h3><p>Crie textos rápidos para seus clientes.</p></div>
-          <div class="form-stack">
-            <label>Tipo<select id="messageType"><option value="convite">Convite</option><option value="bonus">Bônus</option><option value="resultado">Resultado</option><option value="bomdia">Bom dia</option></select></label>
-            <label>Aplicativo<input id="messageApp" placeholder="Ex.: JBPIX"></label>
-            <button id="generateMessage" class="btn primary full">Criar</button>
-            <textarea id="generatedMessage" rows="5" readonly></textarea>
-            <button id="copyMessage" class="btn secondary full">Copiar</button>
+            <label>Quantidade<select id="milharQuantity"><option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option>20</option></select></label>
+            <label>Final desejado<input id="milharEnding" maxlength="2" inputmode="numeric" placeholder="Opcional: 7 ou 25"></label>
+            <label>Começar com<input id="milharStart" maxlength="2" inputmode="numeric" placeholder="Opcional: 1 ou 08"></label>
+            <label class="important-check"><input id="avoidRepeatedDigits" type="checkbox" checked><span><strong>Evitar dígitos repetidos</strong><small>Ex.: evita 1111 e 2200 quando possível.</small></span></label>
+            <div class="generator-actions"><button id="generateMilhares" class="btn primary full">Gerar milhares</button><button id="copyMilhares" class="btn secondary full">Copiar todos</button></div>
+            <div id="milharResults" class="milhar-results"><span class="empty-state">Os milhares aparecerão aqui.</span></div>
           </div>
         </div>
       </div>

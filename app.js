@@ -75,27 +75,62 @@ async function connectFirebase(){
   }catch(err){$("#connectionStatus").textContent="Erro na configuração";console.error(err)}
 }
 
+function renderImportantNotice(){
+  const notices=JSON.parse(localStorage.getItem("portal_vip_notices")||"null")||DEMO.notices;
+  const important=notices.find(n=>n.important===true);
+  const bar=$("#importantNoticeBar");
+  if(!bar)return;
+  const dismissed=sessionStorage.getItem("dismissedImportantNotice");
+  if(important&&String(important.id||important.title)!==dismissed){
+    $("#importantNoticeTitle").textContent=important.title||"Aviso importante";
+    $("#importantNoticeText").textContent=important.text||"";
+    bar.dataset.noticeId=String(important.id||important.title);
+    bar.classList.remove("hidden");
+  }else bar.classList.add("hidden");
+}
+
 function loadLocalContent(){
   const publicPosts=JSON.parse(localStorage.getItem("portal_public_posts")||"null")||DEMO.publicPosts;
   const vipPosts=JSON.parse(localStorage.getItem("portal_vip_posts")||"null")||DEMO.vipPosts;
   const notices=JSON.parse(localStorage.getItem("portal_vip_notices")||"null")||DEMO.notices;
   const files=JSON.parse(localStorage.getItem("portal_vip_files")||"null")||DEMO.files;
-  renderPosts("#publicPosts",publicPosts);renderPosts("#vipPosts",vipPosts);renderNotices(notices);renderFiles(files);
+  renderPosts("#publicPosts",publicPosts);renderPosts("#vipPosts",vipPosts);renderNotices(notices);renderFiles(files);renderImportantNotice();
 }
 
-$("#appSearch").addEventListener("input",e=>renderApps(e.target.value));
+
 $$(".result-tabs button").forEach(b=>b.addEventListener("click",()=>{$$(".result-tabs button").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeResult=b.dataset.result;renderResult()}));
 $("#manualRefresh").addEventListener("click",()=>{renderResult();loadLocalContent();markUpdated();toast("Portal atualizado.")});
 $$(".tool-tabs button").forEach(b=>b.addEventListener("click",()=>{$$(".tool-tabs button").forEach(x=>x.classList.remove("active"));$$(".tool-panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("#"+b.dataset.panel).classList.add("active")}));
 $("#calculateButton").addEventListener("click",()=>{$("#calculationResult").textContent=(Number($("#betValue").value||0)*Number($("#multiplier").value)).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})});
-$("#generateGuesses").addEventListener("click",()=>{const q=Number($("#guessQuantity").value),d=Number($("#guessDigits").value),s=new Set();while(s.size<q)s.add(String(Math.floor(Math.random()*10**d)).padStart(d,"0"));$("#generatedNumbers").innerHTML=[...s].map(x=>`<span>${x}</span>`).join("")});
-const templates={convite:a=>`Olá! Conheça o ${a||"nosso aplicativo"}. Fale comigo para receber o link.`,bonus:a=>`Atenção! O ${a||"aplicativo"} está com uma condição especial. Consulte as regras.`,resultado:a=>`Resultado atualizado no portal ${a||"Kelly Menezes JB"}.`,bomdia:a=>`Bom dia! Confira as novidades do ${a||"portal Kelly Menezes JB"}.`};
-$("#generateMessage").addEventListener("click",()=>$("#generatedMessage").value=templates[$("#messageType").value]($("#messageApp").value.trim()));
-$("#copyMessage").addEventListener("click",async()=>{await navigator.clipboard.writeText($("#generatedMessage").value);toast("Mensagem copiada.")});
 $("#vipLoginButton").addEventListener("click",()=>{const ok=$("#vipUser").value==="vip"&&$("#vipPassword").value==="1234";if(ok){$("#vipLoginBox").classList.add("hidden");$("#vipDashboard").classList.remove("hidden");sessionStorage.setItem("vip","1");$("#vipMessage").textContent=""}else{$("#vipMessage").textContent="Usuário ou senha incorretos.";$("#vipMessage").style.color="var(--danger)"}});
 $("#vipLogout").addEventListener("click",()=>{sessionStorage.removeItem("vip");$("#vipDashboard").classList.add("hidden");$("#vipLoginBox").classList.remove("hidden")});
 $$(".vip-nav button").forEach(b=>b.addEventListener("click",()=>{$$(".vip-nav button").forEach(x=>x.classList.remove("active"));$$(".vip-panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("#"+b.dataset.vipPanel).classList.add("active")}));
 
-renderApps();renderResult();loadLocalContent();updateTime();markUpdated();setInterval(updateTime,1000);setInterval(()=>{renderResult();loadLocalContent();markUpdated()},(CFG.refreshIntervalSeconds||60)*1000);connectFirebase();
+
+function createMilhar(start,end,avoid){
+  for(let attempt=0;attempt<5000;attempt++){
+    let middle="";
+    const fixedStart=(start||"").replace(/\D/g,"").slice(0,2);
+    const fixedEnd=(end||"").replace(/\D/g,"").slice(0,2);
+    const remaining=4-fixedStart.length-fixedEnd.length;
+    if(remaining<0)return null;
+    for(let i=0;i<remaining;i++)middle+=Math.floor(Math.random()*10);
+    const value=(fixedStart+middle+fixedEnd).padStart(4,"0").slice(-4);
+    if(avoid){const counts={};for(const ch of value)counts[ch]=(counts[ch]||0)+1;if(Math.max(...Object.values(counts))>2)continue;}
+    return value;
+  }
+  return null;
+}
+function generateMilhares(){
+  const qty=Number($("#milharQuantity").value);const end=$("#milharEnding").value;const start=$("#milharStart").value;const avoid=$("#avoidRepeatedDigits").checked;
+  if(start.replace(/\D/g,"").length+end.replace(/\D/g,"").length>4){toast("Início e final juntos não podem passar de 4 dígitos.");return;}
+  const set=new Set();let guard=0;while(set.size<qty&&guard<20000){const n=createMilhar(start,end,avoid);if(n)set.add(n);guard++;}
+  const arr=[...set];$("#milharResults").innerHTML=arr.length?arr.map(n=>`<span class="milhar-chip">${n}</span>`).join(""):'<span class="empty-state">Não foi possível gerar com esses filtros. Tente remover algum filtro.</span>';
+}
+$("#generateMilhares").addEventListener("click",generateMilhares);
+$("#copyMilhares").addEventListener("click",async()=>{const nums=$$("#milharResults .milhar-chip").map(x=>x.textContent);if(!nums.length){toast("Gere os milhares primeiro.");return;}await navigator.clipboard.writeText(nums.join(" "));toast("Milhares copiados.");});
+if($("#closeImportantNotice"))$("#closeImportantNotice").addEventListener("click",()=>{const bar=$("#importantNoticeBar");sessionStorage.setItem("dismissedImportantNotice",bar.dataset.noticeId||"");bar.classList.add("hidden")});
+
+renderResult();loadLocalContent();updateTime();markUpdated();setInterval(updateTime,1000);setInterval(()=>{renderResult();loadLocalContent();markUpdated()},(CFG.refreshIntervalSeconds||60)*1000);connectFirebase();
 if(sessionStorage.getItem("vip")==="1"){$("#vipLoginBox").classList.add("hidden");$("#vipDashboard").classList.remove("hidden")}
 $("#whatsappMain").href=`https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent("Olá, Kelly! Vim pelo portal e gostaria de informações.")}`;

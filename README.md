@@ -61,3 +61,11 @@ Cada prêmio pode ter:
 ## Observação importante
 
 O painel administrativo atual salva no navegador. Para vários dispositivos e segurança real, mova esses conteúdos para o Firestore e use Firebase Authentication.
+
+
+## Versão 4
+- Avisos podem ser marcados como importantes no painel.
+- O aviso importante aparece automaticamente no topo do portal.
+- A lista de apps foi substituída por um botão para https://kellymenezes.app.
+- O gerador de mensagens foi removido.
+- Novo gerador avançado de milhar com quantidade, início, final, filtro de repetição e botão para copiar.
