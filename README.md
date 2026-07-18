@@ -1,81 +1,54 @@
-# Portal Kelly Menezes JB — Versão 3 funcional
+# Portal Kelly Menezes JB — V6 Mobile PWA
 
-## O que mudou
+## Principais melhorias
 
-- atualização automática a cada 60 segundos
-- conexão pronta com Firebase/Firestore
-- listener em tempo real com `onSnapshot`
-- modo demonstração quando o Firebase ainda não está configurado
-- área VIP com conteúdos, avisos e downloads
-- painel administrativo local para cadastrar conteúdo
-- conteúdo salvo no navegador com localStorage
-- login VIP demonstrativo
-- login administrativo demonstrativo
+- Interface mobile-first para Android e iPhone.
+- Suporte às áreas seguras do iPhone, notch e barra inferior.
+- PWA instalável com `manifest.webmanifest`.
+- Service worker com cache e tela offline.
+- Ícones para tela inicial.
+- Navegação inferior com cinco acessos.
+- Central de notificações dentro do portal.
+- Preferências por tipo de notificação.
+- Solicitação de notificações do aparelho.
+- Avisos importantes aparecem no topo e na central.
+- Resultados do Firestore podem gerar notificação.
+- Painel administrativo utilizável pelo smartphone.
+- Botões e cards com áreas de toque maiores.
+- Inputs com 16px para impedir zoom automático no iPhone.
+- Animações de toque e suporte a redução de movimento.
 
-## Login VIP
+## Instalação
 
+O PWA precisa ser publicado em HTTPS.
+
+### Android / Chrome
+Use o botão `Instalar` ou o menu do navegador.
+
+### iPhone / Safari
+Abra no Safari, toque em Compartilhar e selecione `Adicionar à Tela de Início`.
+
+## Notificações
+
+A central interna funciona imediatamente.
+
+As notificações do sistema exigem:
+- site em HTTPS;
+- permissão do usuário;
+- service worker ativo.
+
+Para notificações push enviadas mesmo com o portal fechado, conecte um provedor de push, como Firebase Cloud Messaging, ao service worker e ao seu backend.
+
+## Firebase
+
+Preencha `config.js` e altere `firebase.enabled` para `true`.
+
+## Logins demonstrativos
+
+VIP:
 - usuário: `vip`
 - senha: `1234`
 
-## Login do painel
-
+Painel:
 - usuário: `admin`
 - senha: `admin123`
-
-Abra `admin.html` para gerenciar:
-- palpites públicos
-- conteúdos VIP
-- avisos
-- downloads
-
-## Para ativar resultados reais
-
-Abra `config.js` e altere:
-
-```js
-firebase: {
-  enabled: true,
-  apiKey: "...",
-  authDomain: "...",
-  projectId: "...",
-  storageBucket: "...",
-  messagingSenderId: "...",
-  appId: "..."
-}
-```
-
-A coleção padrão é `resultados`.
-
-O portal tenta interpretar documentos com campos como:
-- `loteria`
-- `horario`
-- `timestamp`
-- `premios` ou `resultados`
-
-Cada prêmio pode ter:
-- `milhar`
-- `numero`
-- `bicho`
-- `animal`
-
-## Observação importante
-
-O painel administrativo atual salva no navegador. Para vários dispositivos e segurança real, mova esses conteúdos para o Firestore e use Firebase Authentication.
-
-
-## Versão 4
-- Avisos podem ser marcados como importantes no painel.
-- O aviso importante aparece automaticamente no topo do portal.
-- A lista de apps foi substituída por um botão para https://kellymenezes.app.
-- O gerador de mensagens foi removido.
-- Novo gerador avançado de milhar com quantidade, início, final, filtro de repetição e botão para copiar.
-
-
-## Versão 5 — navegação clean
-
-- Central de Aplicativos transformada em um card totalmente clicável.
-- Não existe mais um botão separado dentro do retângulo.
-- O card inteiro abre https://kellymenezes.app.
-- Nova área de acesso rápido com quatro opções principais.
-- Melhor resposta visual ao passar o mouse e ao tocar no celular.
-- Área VIP com visual de biblioteca de conteúdos.

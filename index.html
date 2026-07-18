@@ -2,8 +2,14 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#06101d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Kelly JB" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
   <title>Kelly Menezes JB | Portal Oficial</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +25,12 @@
       <a href="#palpites">Palpites</a>
       <a href="#vip">VIP</a>
     </nav>
-    <a class="admin-link" href="admin.html">Painel</a>
+    <div class="header-actions">
+      <button id="notificationButton" class="icon-action" aria-label="Abrir notificações">
+        <span>●</span><b id="notificationCount" class="notification-count hidden">0</b>
+      </button>
+      <a class="admin-link" href="admin.html">Painel</a>
+    </div>
   </header>
   <section id="importantNoticeBar" class="important-notice hidden">
     <div class="shell important-notice-inner">
@@ -30,7 +41,14 @@
       <button id="closeImportantNotice" class="important-close" aria-label="Fechar aviso">×</button>
     </div>
   </section>
-
+  <section id="installBanner" class="install-banner hidden">
+    <div class="shell install-inner">
+      <div class="install-icon">K</div>
+      <div class="install-copy"><strong>Instale o Portal Kelly JB</strong><span>Acesso rápido e experiência de aplicativo.</span></div>
+      <button id="installAppButton" class="install-button">Instalar</button>
+      <button id="dismissInstall" class="install-dismiss" aria-label="Agora não">×</button>
+    </div>
+  </section>
 
   <main>
     <section class="hero shell" id="inicio">
@@ -218,6 +236,21 @@
       </div>
     </section>
 
+    <section class="section notification-settings-section" id="notificacoes">
+      <div class="shell">
+        <div class="section-head">
+          <div><span class="eyebrow">NOTIFICAÇÕES</span><h2>Escolha o que deseja receber</h2><p>As preferências ficam salvas neste aparelho.</p></div>
+        </div>
+        <div class="notification-preferences">
+          <label class="preference-row"><span><strong>Resultados atualizados</strong><small>Receba um aviso quando houver um novo resultado.</small></span><input type="checkbox" data-notification-pref="results" checked></label>
+          <label class="preference-row"><span><strong>Conteúdo VIP</strong><small>Novos palpites, análises e materiais exclusivos.</small></span><input type="checkbox" data-notification-pref="vip" checked></label>
+          <label class="preference-row"><span><strong>Avisos importantes</strong><small>Comunicados destacados publicados no painel.</small></span><input type="checkbox" data-notification-pref="important" checked></label>
+          <button id="enableNotifications" class="btn primary full">Ativar notificações neste aparelho</button>
+          <p id="notificationSupportText" class="support-copy"></p>
+        </div>
+      </div>
+    </section>
+
     <section class="section soft">
       <div class="shell support">
         <div><span class="eyebrow">ATENDIMENTO</span><h2>Fale comigo</h2><p>Use o botão abaixo para abrir o WhatsApp.</p></div>
@@ -226,13 +259,25 @@
     </section>
   </main>
 
+  <div id="notificationBackdrop" class="drawer-backdrop hidden"></div>
+  <aside id="notificationDrawer" class="notification-drawer" aria-hidden="true">
+    <div class="drawer-handle"></div>
+    <div class="drawer-head">
+      <div><small>CENTRAL</small><h3>Notificações</h3></div>
+      <button id="closeNotificationDrawer" class="drawer-close">×</button>
+    </div>
+    <div class="drawer-actions"><button id="markAllRead">Marcar todas como lidas</button><a href="#notificacoes" id="openNotificationSettings">Preferências</a></div>
+    <div id="notificationList" class="notification-list"></div>
+  </aside>
+
   <footer><strong>Kelly Menezes JB</strong><span>Conteúdo para maiores de 18 anos. Jogue com responsabilidade.</span></footer>
 
   <nav class="mobile-nav">
-    <a href="#inicio">⌂<small>Início</small></a>
-    <a href="#acessos">▦<small>Acessos</small></a>
-    <a href="#resultados">▤<small>Resultados</small></a>
-    <a href="#vip">★<small>VIP</small></a>
+    <a href="#inicio" class="active"><span>⌂</span><small>Início</small></a>
+    <a href="#resultados"><span>▤</span><small>Resultados</small></a>
+    <a href="#palpites"><span>◎</span><small>Palpites</small></a>
+    <a href="#vip"><span>★</span><small>VIP</small></a>
+    <a href="#notificacoes"><span>◉</span><small>Ajustes</small></a>
   </nav>
 
   <div id="toast" class="toast"></div>
